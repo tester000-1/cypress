@@ -1,14 +1,13 @@
-import Emag1Page from "../../page_object/task3/Emag1Page";
+import Emag1Page from "../../page_object/task3/EmagMobileDevicesFilterResultPage";
 
-describe('Emag products', () => {
-    it('products', () => {
+describe('Emag mobile devices filter result', () => {
+    
+    it('Emag mobile devices filter result', () => {
         const page = new Emag1Page();
-        page.basePage();
+        page.baseUrl();
         page.getTitle().should('eq', 'eMAG.bg - Широка гама продукти');
         page.findMenuItem('Телефони, Таблети & Лаптопи', 1);
-        page.findAirConditioners('Телефони, Таблети & Лаптопи', 1);
-
-
+        page.findCategoryItems('Телефони, Таблети & Лаптопи', 1);
     });
 
 });

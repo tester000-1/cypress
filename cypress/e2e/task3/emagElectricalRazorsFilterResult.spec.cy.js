@@ -1,14 +1,13 @@
-import Emag3Page from "../../page_object/task3/Emag3Page";
+import Emag3Page from "../../page_object/task3/EmagElectricalRazorsFilterResultPage";
 
-describe('Emag products', () => {
-    it('products', () => {
+describe('Emag electrical razors filter result', () => {
+
+    it('Emag electrical razors filter result', () => {
         const page = new Emag3Page();
-        page.basePage();
+        page.baseUrl();
         page.getTitle().should('eq', 'eMAG.bg - Широка гама продукти');
         page.findMenuItem('Здраве и красота', 8);
-        page.findAirConditioners('Здраве и красота', 8);
-
-
+        page.findCategoryItems('Здраве и красота', 8);
     });
 
 });

@@ -1,11 +1,11 @@
-import Emag5Page from "../../page_object/task3/Emag5Page";
+import Emag5Page from "../../page_object/task3/EmagResultForFavoriteItemsPage";
 
-describe('Emag products', () => {
+describe('Emag result for favorite items', () => {
 
-    it('products', () => {
+    it('Emag result for favorite items', () => {
         const page = new Emag5Page();
         const item = 'dji mini 4 pro';
-        page.basePage();
+        page.baseUrl();
         page.getTitle().should('eq', 'eMAG.bg - Широка гама продукти');
         page.getSearchInput()
             .invoke('attr', 'placeholder')
@@ -22,7 +22,6 @@ describe('Emag products', () => {
         page.getSearchResultHeader()
             .should('contain.text','резултата')
             .and('contain.text',`за "${item}"`);
-        //page.selectFilter();
         const arr = [0,1];
         page.addItemsToFavorite(arr);
         page.findHeart().should('have.text', '2');

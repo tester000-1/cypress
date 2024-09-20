@@ -1,10 +1,10 @@
-import Emag4Page from "../../page_object/task3/Emag4Page";
+import Emag4Page from "../../page_object/task3/EmagMobileAndLaptopsSortingResultsByNameAndPricePage";
 
-describe('Emag products', () => {
+describe('Emag mobile and laptops sorting result by name and price', () => {
 
-    it('products', () => {
+    it('Emag mobile and laptops sorting result by name and price - cart result', () => {
         const page = new Emag4Page();
-        page.basePage();
+        page.baseUrl();
         page.getTitle().should('eq', 'eMAG.bg - Широка гама продукти');
         page.findMenuItem('Gaming', 4);
         page.clickMenuItem('Gaming', 4);
@@ -35,7 +35,6 @@ describe('Emag products', () => {
     });
 
     after(() => {
-        //Clear all cookies
         cy.clearAllCookies();
     });
 

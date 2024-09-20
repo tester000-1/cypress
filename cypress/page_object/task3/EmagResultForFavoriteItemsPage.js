@@ -1,31 +1,39 @@
-class Emag5Page {
+class EmagResultForFavoriteItemsPage {
 
-    basePage(){
-        cy.visit("https://www.emag.bg/");
+    baseUrl() {
+        cy.visit(Cypress.env('BASE_URL'))
     }
-    getTitle(){
+
+    getTitle() {
         return cy.title();
     }
-    getSearchInput(){
+
+    getSearchInput() {
         return cy.get('input[id="searchboxTrigger"]');
     }
-    getSearchButtonReset(){
+
+    getSearchButtonReset() {
         return cy.get('button[type="reset"]').first();
     }
-    getSearchDropdown(){
+
+    getSearchDropdown() {
         return cy.get('div[class="searchbox-dropdown"]')
             .find('p',).first();
     }
-    getSearchBtn(){
+
+    getSearchBtn() {
         return cy.get('button[class="btn btn-default searchbox-submit-button"]').first();
     }
-    getSearchResultHeader(){
+
+    getSearchResultHeader() {
         return cy.get('div[class="listing-page-title js-head-title"]').first();
     }
-    selectFilter(){
+
+    selectFilter() {
         cy.get('div[class="sort-control-item"]').find('button[type="button"]').first().click()
     }
-    addItemsToFavorite(arr){
+
+    addItemsToFavorite(arr) {
         for (let i = 0; i < arr.length; i++) {
             cy.get('#card_grid')
                 .find('div[class="card-item card-standard js-product-data js-card-clickable "]')
@@ -40,17 +48,21 @@ class Emag5Page {
                 .click();
         }
     }
-    findHeart(){
+
+    findHeart() {
         return cy.get('span[class="jewel jewel-danger"]');
     }
-    checkHeartCleared(){
+
+    checkHeartCleared() {
         return cy.get('span[class="jewel jewel-danger hidden"]');
     }
-    findFavoriteItemInTheList(index){
+
+    findFavoriteItemInTheList(index) {
         return cy.get('div[class="card-list-content"]').eq(index - 1)
             .find('.text-right')
             .first();
     }
 
 }
-export default Emag5Page;
+
+export default EmagResultForFavoriteItemsPage;

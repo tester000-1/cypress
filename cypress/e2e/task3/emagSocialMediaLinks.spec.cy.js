@@ -1,31 +1,16 @@
-import Emag6Page from "../../page_object/task3/Emag6Page";
+import Emag6Page from "../../page_object/task3/EmagSocialMediaPage";
 
-describe('Emag products', () => {
+describe('Emag social media links', () => {
 
-    it('products', () => {
+    it('Emag social media links', () => {
         const page = new Emag6Page();
-        page.basePage();
+        page.baseUrl();
         page.getTitle().should('eq', 'eMAG.bg - Широка гама продукти');
-
         page.rejectCookies();
-        // Class selector '.em-facebook' , '.em-youtube' , '.em-instagram'
-        //page.getSocialMediaLinkByClass('.em-facebook').click();
-        // page.getCurrentUrl().should( (loc) => {
-        //     //expect(loc.href).to.eq('https://www.facebook.com/eMAGbg');
-        //     expect(loc.pathname).to.eq('/eMAGbg');
-        // });
-        //page.getFBHeader().should('contain','eMAG Bulgaria');
-        //Cypress does not support multiple tabs!
-
-        //page.getSocialMediaLinkByClass('.em-youtube').click();
         page.getSocialMediaLinkByClass('.em-instagram').click();
         cy.url().should('eq','https://www.instagram.com/emag.bg_official/');
 
     });
-
-    // after(() => {
-    //     cy.clearAllCookies();
-    // });
 
 });
 
