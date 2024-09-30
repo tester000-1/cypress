@@ -1,37 +1,45 @@
-import Emag5Page from "../../page_object/task3/EmagResultForFavoriteItemsPage";
+import ResultForFavoriteItemsPage from "../../page_object/task3/ResultForFavoriteItemsPage";
+import Header from "../../page_object/task3/Header";
+import Filter from "../../page_object/task3/Filter";
+import Favorite from "../../page_object/task3/Favorite";
 
 describe('Emag result for favorite items', () => {
 
     it('Emag result for favorite items', () => {
-        const page = new Emag5Page();
+        const page = new ResultForFavoriteItemsPage();
+        const header = new Header();
+        const filter = new Filter();
+        const favorite = new Favorite();
+
         const item = 'dji mini 4 pro';
-        page.baseUrl();
-        page.getTitle().should('eq', 'eMAG.bg - Широка гама продукти');
-        page.getSearchInput()
+        page.visitBaseUrl();
+        page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
+        header.getSearchInput()
             .invoke('attr', 'placeholder')
             .should('equal', 'Какво търсиш днес?');
-        page.getSearchInput().click();
-        page.getSearchDropdown().should('contain.text', 'Популярни търсения в eMAG');
-        page.getSearchButtonReset().should('be.visible').and('be.enabled');
-        page.getSearchInput().type(item);
-        page.getSearchButtonReset().click();
-        page.getSearchInput().should('contain.value', '');
-        page.getSearchInput().type(item);
-        page.getSearchInput().should('contain.value', item);
-        page.getSearchBtn().click();
-        page.getSearchResultHeader()
+        header.getSearchInput().click();
+        header.getSearchDropdown().should('contain.text', 'Популярни търсения в eMAG');
+        header.getSearchButtonReset().should('be.visible').and('be.enabled');
+        header.getSearchInput().type(item);
+        header.getSearchButtonReset().click();
+        header.getSearchInput().should('contain.value', '');
+        header.getSearchInput().type(item);
+        header.getSearchInput().should('contain.value', item);
+        header.getSearchBtn().click();
+        filter.getSearchResultHeader()
             .should('contain.text','резултата')
             .and('contain.text',`за "${item}"`);
+        //page.selectFilter();
         const arr = [0,1];
-        page.addItemsToFavorite(arr);
-        page.findHeart().should('have.text', '2');
-        page.findHeart().click();
-        page.findFavoriteItemInTheList(2).should('be.visible').and('contain.text','Изтрий');
-        page.findFavoriteItemInTheList(2).click('right');
-        page.findHeart().should('have.text', '1');
-        page.findFavoriteItemInTheList(1).should('be.visible').and('contain.text','Изтрий');
-        page.findFavoriteItemInTheList(1).click('right');
-        page.checkHeartCleared().should('have.text', '0');
+        favorite.addItemsToFavorite(arr);
+        favorite.findHeart().should('have.text', '2');
+        favorite.findHeart().click();
+        favorite.findFavoriteItemInTheList(2).should('be.visible').and('contain.text','Изтрий');
+        favorite.findFavoriteItemInTheList(2).click('right');
+        favorite.findHeart().should('have.text', '1');
+        favorite.findFavoriteItemInTheList(1).should('be.visible').and('contain.text','Изтрий');
+        favorite.findFavoriteItemInTheList(1).click('right');
+        favorite.checkHeartCleared().should('have.text', '0');
 
     });
 
@@ -65,5 +73,4 @@ Step: Click the ‘Изтрий’ button on the second item
 Expected result: The item was successfully removed from favorites. The header includes the text ‘Любими 1 Продукт’.
 Step: Click the ‘Изтрий’ button on the last item
 Expected result: The item was successfully removed from favorites. The header includes the text ‘Любими 0 Продукта’.
-
  */

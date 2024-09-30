@@ -1,37 +1,4 @@
-class EmagResultForFavoriteItemsPage {
-
-    baseUrl() {
-        cy.visit(Cypress.env('BASE_URL'))
-    }
-
-    getTitle() {
-        return cy.title();
-    }
-
-    getSearchInput() {
-        return cy.get('input[id="searchboxTrigger"]');
-    }
-
-    getSearchButtonReset() {
-        return cy.get('button[type="reset"]').first();
-    }
-
-    getSearchDropdown() {
-        return cy.get('div[class="searchbox-dropdown"]')
-            .find('p',).first();
-    }
-
-    getSearchBtn() {
-        return cy.get('button[class="btn btn-default searchbox-submit-button"]').first();
-    }
-
-    getSearchResultHeader() {
-        return cy.get('div[class="listing-page-title js-head-title"]').first();
-    }
-
-    selectFilter() {
-        cy.get('div[class="sort-control-item"]').find('button[type="button"]').first().click()
-    }
+class Favorite {
 
     addItemsToFavorite(arr) {
         for (let i = 0; i < arr.length; i++) {
@@ -65,4 +32,4 @@ class EmagResultForFavoriteItemsPage {
 
 }
 
-export default EmagResultForFavoriteItemsPage;
+export default Favorite;

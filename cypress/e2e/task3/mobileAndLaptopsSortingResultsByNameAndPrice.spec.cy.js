@@ -1,25 +1,29 @@
-import Emag4Page from "../../page_object/task3/EmagMobileAndLaptopsSortingResultsByNameAndPricePage";
+import MobileAndLaptopsSortingResultPage from "../../page_object/task3/MobileAndLaptopsSortingResultsByNameAndPricePage";
+import Header from "../../page_object/task3/Header";
+import Filter from "../../page_object/task3/Filter";
 
 describe('Emag mobile and laptops sorting result by name and price', () => {
 
     it('Emag mobile and laptops sorting result by name and price - cart result', () => {
-        const page = new Emag4Page();
-        page.baseUrl();
-        page.getTitle().should('eq', 'eMAG.bg - Широка гама продукти');
-        page.findMenuItem('Gaming', 4);
-        page.clickMenuItem('Gaming', 4);
+        const page = new MobileAndLaptopsSortingResultPage();
+        const header = new Header();
+        const filter = new Filter();
+        page.visitBaseUrl();
+        page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
+        header.findMenuItem('Gaming', 4);
+        header.clickMenuItem('Gaming', 4);
         page.navigateToConsoles();
-        page.getGamingHeader().should('contain', 'Гейминг конзоли');
+        page.getFirstH1().should('contain', 'Гейминг конзоли');
         page.clickVRLink();
         page.findSectionTitle().should('contain.text', 'VR Gaming Очила');
-        page.moveLeftKnob('50');
-        page.getPriceCheckbox().should('have.class', 'active');
-        page.getMinPrice().invoke('val').then(value => {
+        filter.moveLeftKnob('50');
+        filter.getPriceCheckbox().should('have.class', 'active');
+        filter.getMinPrice().invoke('val').then(value => {
             const bool = Number(value) >= 40;
             expect(bool).to.be.true;
         });
-        page.getGridItemHeader(1).should('be.visible');
-        page.pressGridItem(1);
+        filter.getGridItemHeader(1).should('be.visible');
+        filter.pressGridItem(1);
         page.checkPriceForSelectedItem().should('contain', '1.739,99 лв.');
         page.checkHeaderForSelectedItem().should('contain', 'VR очила META Quest 3');
         page.addToCart();
@@ -41,6 +45,7 @@ describe('Emag mobile and laptops sorting result by name and price', () => {
 });
 
 /*
+Test Case 4
 Step: Open eMAG.bg
 Expected result: The browser tab title is “eMAG.bg - Широка гама продукти”
 Step: Navigate to “Телефони Таблети & Лаптопи – Мобилни телефони и аксесоари - Мобилни телефони”
