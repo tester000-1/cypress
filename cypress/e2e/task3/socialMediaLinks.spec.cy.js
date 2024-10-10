@@ -1,6 +1,15 @@
 import SocialMediaPage from "../../page_object/task3/SocialMediaPage";
 import Footer from "../../page_object/task3/Footer";
 
+// before(() => {
+//     // makes custom commands available to all subsequent cy.origin('cypress.io)
+//     // calls in this spec. put it in your support file to make them available to
+//     // all specs
+//     cy.origin('google.com', () => {
+//         Cypress.require('../support/commands')
+//     })
+// })
+
 describe('Emag social media links', () => {
 
     it('Emag social media links', () => {
@@ -11,22 +20,42 @@ describe('Emag social media links', () => {
 
         page.rejectCookies();
         // Class selector '.em-facebook' , '.em-youtube' , '.em-instagram'
-        //footer.getSocialMediaLinkByClass('.em-facebook').click();
-        // page.getCurrentUrl().should( (loc) => {
-        //     //expect(loc.href).to.eq('https://www.facebook.com/eMAGbg');
-        //     expect(loc.pathname).to.eq('/eMAGbg');
-        // });
-        //footer.getFBHeader().should('contain','eMAG Bulgaria');
-        //Cypress does not support multiple tabs!
+        footer.getSocialMediaLinkByClass('.em-facebook').click();
 
-        //footer.getSocialMediaLinkByClass('.em-youtube').click();
+        cy.origin('https://www.facebook.com/', () => {
+            page.rejectSocialMediaCookiesAndGetTheUrl();
+
+            // cy.get('div[aria-label="Allow all cookies"]', {timeout: 8000}).eq(0).should('not.be.visible');
+            // cy.get('div[aria-label="Decline optional cookies"]').eq(0)
+            //     .click({force: true, multiple: true});
+            cy.url().should('eq', 'https://www.facebook.com/eMAGbg');
+        });
+
+        page.visitBaseUrl();
+        page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
         footer.getSocialMediaLinkByClass('.em-instagram').click();
-        page.getCurrentUrl().should('eq','https://www.instagram.com/emag.bg_official/');
 
-    });
+        cy.origin('https://www.instagram.com/', () => {
+            cy.get('div[role="dialog"]', {timeout: 8000}).eq(0).should('be.visible');
+            cy.get('button:contains("Decline optional cookies")').eq(0)
+                .click({force: true, multiple: true});
+            cy.url().should('eq', 'https://www.instagram.com/emag.bg_official/');
+        });
 
-    after(() => {
-        cy.clearAllCookies();
+        page.visitBaseUrl();
+        page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
+        footer.getSocialMediaLinkByClass('.em-youtube').click();
+
+        cy.origin('https://consent.youtube.com', () => {
+            cy.get('h1', {timeout: 8000}).eq(0).should('be.visible');
+            cy.get('button[aria-label="Reject all"]').eq(0)
+                .click({force: true, multiple: true});
+        });
+
+        cy.origin('https://www.youtube.com/', () => {
+            cy.url().should('eq', 'https://www.youtube.com/channel/UC5y5r9BY5IiT4MkBrMtZRnA');
+        });
+
     });
 
 });

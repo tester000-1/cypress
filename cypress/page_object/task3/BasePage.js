@@ -53,6 +53,10 @@ class BasePage {
         return cy.get(`div:contains("${text}")`);
     }
 
+    getButtonWithText(text){
+        return cy.get(`button:contains("${text}")`);
+    }
+
 }
 
 export default BasePage;

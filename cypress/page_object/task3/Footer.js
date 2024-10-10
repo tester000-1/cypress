@@ -1,5 +1,6 @@
 class Footer {
 
+    // iconClass: '.em-facebook' , '.em-youtube' , '.em-instagram'
     getSocialMediaLinkByClass(iconClass) {
         cy.scrollTo('bottom');
         cy.get('div[class="footer-copy footer-inverse"]')
@@ -8,14 +9,6 @@ class Footer {
             .find(iconClass)
             .parent()
             .invoke('removeAttr', 'target');
-    }
-
-    getFBHeader() {
-        return cy.get('h1[class="html-h1"]');
-    }
-
-    getYoutubeHeader() {
-        return cy.get('h1[class="dynamic-text-view-model-wiz__h1"]').first();
     }
 
 }
