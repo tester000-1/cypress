@@ -1,4 +1,4 @@
-import ResultForFavoriteItemsPage from "../../page_object/task3/ResultForFavoriteItemsPage";
+import FavoriteItemsPage from "../../page_object/task3/FavoriteItemsPage";
 import Header from "../../page_object/task3/Header";
 import Filter from "../../page_object/task3/Filter";
 import Favorite from "../../page_object/task3/Favorite";
@@ -6,7 +6,7 @@ import Favorite from "../../page_object/task3/Favorite";
 describe('Emag result for favorite items', () => {
 
     it('Emag result for favorite items', () => {
-        const page = new ResultForFavoriteItemsPage();
+        const page = new FavoriteItemsPage();
         const header = new Header();
         const filter = new Filter();
         const favorite = new Favorite();

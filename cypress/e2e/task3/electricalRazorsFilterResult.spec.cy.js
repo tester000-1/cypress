@@ -1,4 +1,4 @@
-import ElectricalRazorsFilterResultPage from "../../page_object/task3/ElectricalRazorsFilterResultPage";
+import ElectricalRazorsPage from "../../page_object/task3/ElectricalRazorsPage";
 import Header from "../../page_object/task3/Header";
 import Filter from "../../page_object/task3/Filter";
 import CardView from "../../page_object/task3/CardView";
@@ -7,7 +7,7 @@ import Pagination from "../../page_object/task3/Pagination";
 describe('Emag electrical razors filter result', () => {
 
     it('Emag electrical razors filter result', () => {
-        const page = new ElectricalRazorsFilterResultPage();
+        const page = new ElectricalRazorsPage();
         const header = new Header();
         const filter = new Filter();
         const card = new CardView();

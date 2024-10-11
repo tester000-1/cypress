@@ -1,4 +1,4 @@
-import AirConditionerResultPage from "../../page_object/task3/AirConditionerFilterResultPage";
+import AirConditionerResultPage from "../../page_object/task3/AirConditionerPage";
 import Header from "../../page_object/task3/Header";
 import Filter from "../../page_object/task3/Filter";
 import CardView from "../../page_object/task3/CardView";

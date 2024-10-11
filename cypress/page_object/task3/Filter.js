@@ -36,14 +36,14 @@ class Filter {
         return cy.get('#card_grid').eq(item - 1).find('img').first().click();
     }
 
-    selectSortingDropdown(value){
+    selectSortingDropdown(value) {
         const result = `li:nth-child(${value})`;
         cy.get('span:contains("Най-популярни")')
-            .click({multiple:true, force: true});
-        cy.get('div[tab-index="-1"]',{timeout:15000})
+            .click({multiple: true, force: true});
+        cy.get('div[tab-index="-1"]', {timeout: 15000})
             .find(result).then(s => {
-            cy.wrap(s).click({multiple:true});
-            });
+            cy.wrap(s).click({multiple: true});
+        });
     }
 
 }

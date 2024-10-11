@@ -1,4 +1,4 @@
-import MobileDevicesFilterResultPage from "../../page_object/task3/MobileDevicesFilterResultPage";
+import MobileDevicesPage from "../../page_object/task3/MobileDevicesPage";
 import Header from "../../page_object/task3/Header";
 import Filter from "../../page_object/task3/Filter";
 import CardView from "../../page_object/task3/CardView";
@@ -6,7 +6,7 @@ import Pagination from "../../page_object/task3/Pagination";
 
 describe('Emag mobile devices filter result', () => {
     it('Emag mobile devices filter result', () => {
-        const page = new MobileDevicesFilterResultPage();
+        const page = new MobileDevicesPage();
         const header = new Header();
         const filter = new Filter();
         const card = new CardView();
