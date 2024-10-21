@@ -1,32 +1,34 @@
 import AirConditionerResultPage from "../../page_object/task3/AirConditionerPage";
-import Header from "../../page_object/task3/Header";
+import TopNavigation from "../../page_object/task3/TopNavigation";
 import Filter from "../../page_object/task3/Filter";
 import CardView from "../../page_object/task3/CardView";
 import Pagination from "../../page_object/task3/Pagination";
+import Browser from "../../utils/Browser";
 
 describe('Emag air conditioner filter result', () => {
 
     it('Emag air conditioner filter result', () => {
         const page = new AirConditionerResultPage();
-        const header = new Header();
+        const nav = new TopNavigation();
         const filter = new Filter();
         const card = new CardView();
         const pagination = new Pagination();
+        const browser = new Browser();
         const conditionerName = "Daikin";
-        page.visitBaseUrl();
+        browser.visitBaseUrl();
         page.acceptCookies();
         page.dismissLoginModal();
         page.closeMarketBanner();
         page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
-        header.findMenuItem('Големи електроуреди', 5);
-        header.findCategoryItems('Големи електроуреди', 5);
-        page.openView("klimatici");
+        nav.findMenuItem('Големи електроуреди', 5);
+        nav.findCategoryItems('Големи електроуреди', 5);
+        browser.openPageView("klimatici");
         page.selectItemNameById("6416");
         card.getDropdownItem(1).should('contain', conditionerName);
         card.getDropdownItem(1).click();
         filter.getFilterBtn().should('contain', 'виж още').and('contain', 'резултата');
         filter.getFilterBtn().click();
-        //Check the filter request to be completed
+        //Check if the filter request is completed
         page.getSectionTitle("Климатици Daikin").should('be.visible');
         card.findCardTitle(1).then(($item) => {
             const titleValue = $item.text().toLowerCase();
@@ -57,7 +59,6 @@ describe('Emag air conditioner filter result', () => {
             } else {correct = true;}
             expect(correct, 'The new price should be equal or higher than the previous one').to.be.true;
         });
-
     });
 
 });

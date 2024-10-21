@@ -1,12 +1,14 @@
 import SocialMediaPage from "../../page_object/task3/SocialMediaPage";
 import Footer from "../../page_object/task3/Footer";
+import Browser from "../../utils/Browser";
 
 describe('Emag social media links', () => {
 
     it('Emag social media links', () => {
         const page = new SocialMediaPage();
         const footer = new Footer();
-        page.visitBaseUrl();
+        const browser = new Browser();
+        browser.visitBaseUrl();
         page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
         page.rejectCookies();
         // Class selector '.em-facebook' , '.em-youtube' , '.em-instagram'
@@ -16,7 +18,7 @@ describe('Emag social media links', () => {
             const thisPage = new OriginMediaPage();
             thisPage.rejectSocialMediaCookiesAndGetTheUrlFromFacebook().should('eq', 'https://www.facebook.com/eMAGbg');
         });
-        page.visitBaseUrl();
+        browser.visitBaseUrl();
         page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
         footer.getSocialMediaLinkByClass('.em-instagram').click();
         cy.origin('https://www.instagram.com/', () => {
@@ -24,7 +26,7 @@ describe('Emag social media links', () => {
             const thisPage = new OriginMediaPage();
             thisPage.rejectSocialMediaCookiesAndGetTheUrlFromInstagram().should('eq', 'https://www.instagram.com/emag.bg_official/');
         });
-        page.visitBaseUrl();
+        browser.visitBaseUrl();
         page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
         footer.getSocialMediaLinkByClass('.em-youtube').click();
         cy.origin('https://consent.youtube.com', () => {

@@ -1,31 +1,32 @@
 import FavoriteItemsPage from "../../page_object/task3/FavoriteItemsPage";
-import Header from "../../page_object/task3/Header";
+import TopNavigation from "../../page_object/task3/TopNavigation";
 import Filter from "../../page_object/task3/Filter";
 import Favorite from "../../page_object/task3/Favorite";
+import Browser from "../../utils/Browser";
 
 describe('Emag result for favorite items', () => {
 
     it('Emag result for favorite items', () => {
         const page = new FavoriteItemsPage();
-        const header = new Header();
+        const nav = new TopNavigation();
         const filter = new Filter();
         const favorite = new Favorite();
-
+        const browser = new Browser();
         const item = 'dji mini 4 pro';
-        page.visitBaseUrl();
+        browser.visitBaseUrl();
         page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
-        header.getSearchInput()
+        nav.getSearchInput()
             .invoke('attr', 'placeholder')
             .should('equal', 'Какво търсиш днес?');
-        header.getSearchInput().click();
-        header.getSearchDropdown().should('contain.text', 'Популярни търсения в eMAG');
-        header.getSearchButtonReset().should('be.visible').and('be.enabled');
-        header.getSearchInput().type(item);
-        header.getSearchButtonReset().click();
-        header.getSearchInput().should('contain.value', '');
-        header.getSearchInput().type(item);
-        header.getSearchInput().should('contain.value', item);
-        header.getSearchBtn().click();
+        nav.getSearchInput().click();
+        nav.getSearchDropdown().should('contain.text', 'Популярни търсения в eMAG');
+        nav.getSearchButtonReset().should('be.visible').and('be.enabled');
+        nav.getSearchInput().type(item);
+        nav.getSearchButtonReset().click();
+        nav.getSearchInput().should('contain.value', '');
+        nav.getSearchInput().type(item);
+        nav.getSearchInput().should('contain.value', item);
+        nav.getSearchBtn().click();
         filter.getSearchResultHeader()
             .should('contain.text','резултата')
             .and('contain.text',`за "${item}"`);
@@ -40,7 +41,6 @@ describe('Emag result for favorite items', () => {
         favorite.findFavoriteItemInTheList(1).should('be.visible').and('contain.text','Изтрий');
         favorite.findFavoriteItemInTheList(1).click('right');
         favorite.checkHeartCleared().should('have.text', '0');
-
     });
 
     after(() => {

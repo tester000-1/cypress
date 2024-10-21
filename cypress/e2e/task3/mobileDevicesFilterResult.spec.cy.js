@@ -1,27 +1,28 @@
 import MobileDevicesPage from "../../page_object/task3/MobileDevicesPage";
-import Header from "../../page_object/task3/Header";
+import TopNavigation from "../../page_object/task3/TopNavigation";
 import Filter from "../../page_object/task3/Filter";
 import CardView from "../../page_object/task3/CardView";
 import Pagination from "../../page_object/task3/Pagination";
+import Browser from "../../utils/Browser";
 
 describe('Emag mobile devices filter result', () => {
     it('Emag mobile devices filter result', () => {
         const page = new MobileDevicesPage();
-        const header = new Header();
+        const nav = new TopNavigation();
         const filter = new Filter();
         const card = new CardView();
         const pagination = new Pagination();
+        const browser = new Browser();
         const brandName = "Samsung";
-        page.visitBaseUrl()
+        browser.visitBaseUrl()
         page.acceptCookies();
         page.dismissLoginModal();
         page.closeMarketBanner();
         page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
-        header.findMenuItem('Телефони, Таблети & Лаптопи', 1);
-        header.findCategoryItems('Телефони, Таблети & Лаптопи', 1);
-        page.openView("mobilni-telefoni");
+        nav.findMenuItem('Телефони, Таблети & Лаптопи', 1);
+        nav.findCategoryItems('Телефони, Таблети & Лаптопи', 1);
+        browser.openPageView("mobilni-telefoni");
         page.getSectionTitle('Мобилни телефони').should('be.visible');
-        page.closeMarketBanner();
         page.expandFilterMoreBrands();
         page.selectBrandById("42");
         // Check the filter request to be completed

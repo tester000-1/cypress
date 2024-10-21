@@ -1,17 +1,19 @@
 import MobileAndLaptopsSortingResultPage from "../../page_object/task3/MobileAndLaptopsPage";
-import Header from "../../page_object/task3/Header";
+import TopNavigation from "../../page_object/task3/TopNavigation";
 import Filter from "../../page_object/task3/Filter";
+import Browser from "../../utils/Browser";
 
 describe('Emag mobile and laptops sorting result by name and price', () => {
 
     it('Emag mobile and laptops sorting result by name and price - cart result', () => {
         const page = new MobileAndLaptopsSortingResultPage();
-        const header = new Header();
+        const nav = new TopNavigation();
         const filter = new Filter();
-        page.visitBaseUrl();
+        const browser = new Browser();
+        browser.visitBaseUrl();
         page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
-        header.findMenuItem('Gaming', 4);
-        header.clickMenuItem('Gaming', 4);
+        nav.findMenuItem('Gaming', 4);
+        nav.clickMenuItem('Gaming', 4);
         page.navigateToConsoles();
         page.getFirstH1().should('contain', 'Гейминг конзоли');
         page.clickVRLink();
@@ -35,7 +37,6 @@ describe('Emag mobile and laptops sorting result by name and price', () => {
         page.deleteCartItems(); //remove cart items
         page.getLastMessage().should('contain', 'Количката за пазаруване е празна. ' +
                 'За да добавиш продукти в количката, моля да се върнеш в началото.');
-
     });
 
     after(() => {

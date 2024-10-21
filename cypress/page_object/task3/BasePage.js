@@ -1,3 +1,5 @@
+import {Timeout} from "../../utils/Timeout";
+
 class BasePage {
 
     constructor() {
@@ -5,33 +7,27 @@ class BasePage {
             throw new Error("Abstract class cannot be instantiated");
     }
 
-    visitBaseUrl() {
-        cy.visit(Cypress.env('BASE_URL'));
-    }
-
-    openView(path) {
-        const fullPath = Cypress.env('BASE_URL') + path;
-        cy.visit(fullPath);
-    }
-
     getWebPageTitle() {
         return cy.title();
     }
 
     rejectCookies() {
-        cy.get('button:contains("Откажи всички")', {timeout: 15000}).click();
+        cy.get('button:contains("Откажи всички")', {timeout: Timeout.EXTENSIVE}).click();
     }
 
-    acceptCookies(){
-        cy.get('button:contains("Приеми всички")', {timeout: 15000}).click();
+    acceptCookies() {
+        cy.get('button:contains("Приеми всички")', {timeout: Timeout.EXTENSIVE}).click();
     }
 
-    closeMarketBanner(){
+    closeMarketBanner() {
         cy.get('button[data-ntf="close"]').click();
     }
 
-    dismissLoginModal(){
-        cy.get('button[class="js-dismiss-login-notice-btn dismiss-btn btn btn-link pad-sep-none pad-hrz-none"]')
+    dismissLoginModal() {
+        cy.waitUntil(() => cy.get('.gdpr-cookie-banner').should('be.visible'));
+        cy.get('.gdpr-cookie-banner')
+            .find('button')
+            .first()
             .click();
     }
 
@@ -40,20 +36,19 @@ class BasePage {
     }
 
     getSectionTitle(sectionName) {
-        //cy.get('div[class="listing-page-title js-head-title"]').should('be.visible');
-        return cy.get('h1:contains("' + sectionName + '")', {timeout: 15000});
+        return cy.get('h1:contains("' + sectionName + '")', {timeout: Timeout.EXTENSIVE});
     }
 
-    getListingPanelHeader(sectionName){
+    getListingPanelHeader(sectionName) {
         return cy.get('div[class="listing-panel-heading hidden-xs"]')
-            .find('h1:contains("' + sectionName + '")', {timeout: 15000}).first();
+            .find('h1:contains("' + sectionName + '")', {timeout: Timeout.EXTENSIVE}).first();
     }
 
-    getDivWithText(text){
+    getDivWithText(text) {
         return cy.get(`div:contains("${text}")`);
     }
 
-    getButtonWithText(text){
+    getButtonWithText(text) {
         return cy.get(`button:contains("${text}")`);
     }
 

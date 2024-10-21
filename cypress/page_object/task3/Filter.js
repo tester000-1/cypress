@@ -1,7 +1,9 @@
+import {Timeout} from "../../utils/Timeout";
+
 class Filter {
 
     getFilterBtn() {
-        return cy.get('button[class="gc-modal-footer-show-results font-bold gtm_zsertyhtnc"]');
+        return cy.get('.gc-modal-footer-show-results');
     }
 
     selectFilter() {
@@ -40,7 +42,7 @@ class Filter {
         const result = `li:nth-child(${value})`;
         cy.get('span:contains("Най-популярни")')
             .click({multiple: true, force: true});
-        cy.get('div[tab-index="-1"]', {timeout: 15000})
+        cy.get('div[tab-index="-1"]', {timeout: Timeout.EXTRA_EXTENSIVE})
             .find(result).then(s => {
             cy.wrap(s).click({multiple: true});
         });

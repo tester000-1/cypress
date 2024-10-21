@@ -1,28 +1,29 @@
 import ElectricalRazorsPage from "../../page_object/task3/ElectricalRazorsPage";
-import Header from "../../page_object/task3/Header";
+import TopNavigation from "../../page_object/task3/TopNavigation";
 import Filter from "../../page_object/task3/Filter";
 import CardView from "../../page_object/task3/CardView";
 import Pagination from "../../page_object/task3/Pagination";
+import Browser from "../../utils/Browser";
 
 describe('Emag electrical razors filter result', () => {
 
     it('Emag electrical razors filter result', () => {
         const page = new ElectricalRazorsPage();
-        const header = new Header();
+        const nav = new TopNavigation();
         const filter = new Filter();
         const card = new CardView();
         const pagination = new Pagination();
+        const browser = new Browser();
         const razorName = "Braun";
-        page.visitBaseUrl()
+        browser.visitBaseUrl()
         page.acceptCookies();
         page.dismissLoginModal();
         page.closeMarketBanner();
         page.getWebPageTitle().should('eq', 'eMAG.bg - Широка гама продукти');
-        header.findMenuItem('Здраве и красота', 8);
-        header.findCategoryItems('Здраве и красота', 8);
-        page.openView("elektricheski-samobrysnachki");
+        nav.findMenuItem('Здраве и красота', 8);
+        nav.findCategoryItems('Здраве и красота', 8);
+        browser.openPageView("elektricheski-samobrysnachki");
         page.getSectionTitle('Ел. самобръсначки').should('be.visible');
-        page.closeMarketBanner();
         page.expandFilterMoreBrands();
         page.selectBrandById("447");
         // Check the filter request to be completed
