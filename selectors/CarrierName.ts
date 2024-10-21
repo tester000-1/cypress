@@ -1,0 +1,27 @@
+enum CarrierName{
+    //selector: data-option-id
+    EMAG = 1,
+    FLANCO = 103888,
+    MOBI_STORE = 22955,
+    EVO_MAG = 133960,
+    DWYN_SHOP = 120233,
+    ELECTRO_BULGARIA = 162289,
+    VMA_PLUS = 115396,
+    C_AND_A_Connect = 8690,
+    ATU_IT = 19977,
+    VEXIO = 13296,
+    SMARTX_BG = 24580,
+    ULTRA_RETAIL = 46665,
+    KATTARA_TELECOM = 33298,
+    MORELE = 71750,
+    GEMA_MIXT_SERV = 81789,
+    ZOWI = 153819,
+    RAFT_ONLINE = 18188,
+    FOUR_GAMERS = 22658,
+    SEM_SOLUTIONS = 76408,
+    DIGEXPERTS = 86776,
+    XUPE_GROUP = 95028,
+    KLAR_TUR = 113407,
+    FOR_IT = 120315
+}
+export default CarrierName;
